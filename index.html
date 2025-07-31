@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our little huge History</title>
   <style>
     body, html {
@@ -15,8 +16,9 @@
 
     .slideshow {
       position: relative;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
+      overflow: hidden;
     }
 
     .slide {
@@ -27,7 +29,7 @@
       background-repeat: no-repeat;
       background-position: center;
       opacity: 0;
-      transition: opacity 2s ease-in-out;
+      transition: opacity 1.5s ease-in-out;
     }
 
     .slide.active {
@@ -40,8 +42,24 @@
       width: 100%;
       text-align: center;
       color: white;
-      font-size: 2em;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      font-size: 5vw;
+      padding: 0 10px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    }
+
+    #startButton {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 6vw;
+      background-color: #ffffff22;
+      border: 2px solid white;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 10;
     }
 
     audio {
@@ -49,10 +67,12 @@
     }
   </style>
 </head>
+
 <body>
-<button onclick="startSlideshow()"> ▶️ Start with music M'lady?</button>
 
 <div class="slideshow">
+<button id="startButton" onclick="startSlideshow()"> ▶️ Start with music M'lady? 🎵</button>
+
   <div class="slide active" style="background-image: url('1.jpg');"  data-text="The journey begins...pasteis!"></div>
   <div class="slide"        style="background-image: url('2.jpg');"  data-text="The first signs to remember;"></div>
   <div class="slide"        style="background-image: url('3.jpg');"  data-text="Forever bonded in our hearts;"></div>
@@ -80,7 +100,6 @@
   <div class="slide"        style="background-image: url('25.jpg');" data-text="My everthing."></div>
   <div class="slide"        style="background-image: url('26.jpeg');" data-text="Meow me?"></div>
 
-
   <div class="overlay-text" id="slideText">The Journey Begins...</div>
 </div>
 
@@ -91,7 +110,10 @@
 <script>
   const slides = document.querySelectorAll('.slide');
   const slideText = document.getElementById('slideText');
+  const startButton = document.getElementById('startButton');
+  const music = document.getElementById('bgMusic');
   let current = 0;
+  let interval;
 
   function showNextSlide() {
     slides[current].classList.remove('active');
@@ -99,16 +121,13 @@
     slides[current].classList.add('active');
     slideText.textContent = slides[current].getAttribute('data-text');
   }
-
-  setInterval(showNextSlide, 6000); // Change every 6 seconds
   
   function startSlideshow() {
-    const music = document.getElementById('bgMusic');
-    music.play();
-
-    // Hide the button after starting
-    event.target.style.display = 'none';
+    startButton.style.display = 'none';
+    music.play().catch(e => console.warn("Music autoplay blocked:", e));
+    interval = setInterval(showNextSlide, 6000);
   }
+
 </script>
 
 </body>
