@@ -95,31 +95,31 @@
   <div class="slide active" style="background-image: url('1.jpg');"   data-text="The journey begins...pasteis!"></div>
   <div class="slide"        style="background-image: url('2.jpg');"   data-text="The first signs to remember;"></div>
   <div class="slide"        style="background-image: url('3.jpg');"   data-text="Forever bonded in our hearts;"></div>
-  <div class="slide"        style="background-image: url('4.jpg');"   data-text="Like everything good;"></div>
-  <div class="slide"        style="background-image: url('5.jpg');"   data-text="We kept closest;"></div>
-  <div class="slide"        style="background-image: url('6.jpg');"   data-text="Tiny things;"></div>
-  <div class="slide"        style="background-image: url('7.jpg');"   data-text="Makes big difference;"></div>
-  <div class="slide"        style="background-image: url('8.jpg');"   data-text="Why you so beautiful?"></div>
-  <div class="slide"        style="background-image: url('9.jpg');"   data-text="New horizon?"></div>
-  <div class="slide"        style="background-image: url('10.jpg');"  data-text="Same feeling."></div>
-  <div class="slide"        style="background-image: url('11.jpg');"  data-text="Together always better;"></div>
+  <div class="slide"        style="background-image: url('4.jpg');"   data-text="Good things stay;"></div>
+  <div class="slide"        style="background-image: url('5.jpg');"   data-text="We kept it closest;"></div>
+  <div class="slide"        style="background-image: url('6.jpg');"   data-text="Tiny moments, infinite meaning;"></div>
+  <div class="slide"        style="background-image: url('7.jpg');"   data-text="Makes a big difference;"></div>
+  <div class="slide"        style="background-image: url('8.jpg');"   data-text="New colours came to our lives."></div>
+  <div class="slide"        style="background-image: url('9.jpg');"   data-text="We get new horizons."></div>
+  <div class="slide"        style="background-image: url('10.jpg');"  data-text="This feeling is still growing."></div>
+  <div class="slide"        style="background-image: url('11.jpg');"  data-text="Together always is better;"></div>
+  <div class="slide"        style="background-image: url('13.jpg');"  data-text="Changing seasons."></div>
   <div class="slide"        style="background-image: url('12.jpg');"  data-text="Merry Chrysler!"></div>
-  <div class="slide"        style="background-image: url('13.jpg');"  data-text="Boo!"></div>
   <div class="slide"        style="background-image: url('14.jpg');"  data-text="The life is short;"></div>
-  <div class="slide"        style="background-image: url('15.jpg');"  data-text="But very funny!"></div>
-  <div class="slide"        style="background-image: url('16.jpg');"  data-text="Within our energy..."></div>
-  <div class="slide"        style="background-image: url('17.jpg');"  data-text="Anywhere is the right place."></div>
-  <div class="slide"        style="background-image: url('18.jpg');"  data-text="Exploring also counts."></div>
-  <div class="slide"        style="background-image: url('19.jpg');"  data-text="My gang is complete."></div>
-  <div class="slide"        style="background-image: url('20.jpg');"  data-text="My personal trainer."></div>
-  <div class="slide"        style="background-image: url('21.jpg');"  data-text="My half-butter-half;"></div>
+  <div class="slide"        style="background-image: url('15.jpg');"  data-text="Yet with you is funny journey!"></div>
+  <div class="slide"        style="background-image: url('16.jpg');"  data-text="With our energy..."></div>
+  <div class="slide"        style="background-image: url('17.jpg');"  data-text="Anywhere is the perfect place."></div>
+  <div class="slide"        style="background-image: url('18.jpg');"  data-text="Exploring around also counts."></div>
+  <div class="slide"        style="background-image: url('19.jpg');"  data-text="The Bonnie to my Clyde."></div>
+  <div class="slide"        style="background-image: url('20.jpg');"  data-text="In every rep and in every step."></div>
+  <div class="slide"        style="background-image: url('21.jpg');"  data-text="My half-butter half;"></div>
   <div class="slide"        style="background-image: url('22.jpg');"  data-text="May the force be with us."></div>
-  <div class="slide"        style="background-image: url('23.jpg');"  data-text="Either God :)"></div>
-  <div class="slide"        style="background-image: url('24.jpg');"  data-text="Coffee partner..."></div>
-  <div class="slide"        style="background-image: url('25.jpg');"  data-text="My everthing."></div>
+  <div class="slide"        style="background-image: url('23.jpg');"  data-text="or maybe Jesus :)"></div>
+  <div class="slide"        style="background-image: url('24.jpg');"  data-text="My snackmate for life."></div>
+  <div class="slide"        style="background-image: url('25.jpg');"  data-text="My everything."></div>
   <div class="slide"        style="background-image: url('26.jpeg');" data-text="Meow me?"></div>
-
-  <div class="overlay-text" id="slideText">The Journey will begin ...</div>
+  
+<div class="overlay-text" id="slideText">The Journey will begin ...</div>
 </div>
 
 <audio id="bgMusic" loop>
@@ -144,6 +144,9 @@
   function startSlideshow() {
     document.getElementById('startOverlay').style.display = 'none';
     music.play().catch(e => console.warn("Music autoplay blocked:", e));
+	
+	slideText.textContent = slides[current].getAttribute('data-text');
+	
     interval = setInterval(showNextSlide, 6000);
   }
 
