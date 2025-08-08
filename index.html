@@ -122,8 +122,12 @@
 <div class="overlay-text" id="slideText">The Journey will begin ...</div>
 </div>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic">
   <source src="Sugar.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bgMusic2">
+  <source src="cat.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -133,22 +137,59 @@
   const music = document.getElementById('bgMusic');
   let current = 0;
   let interval;
-
-  function showNextSlide() {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-    slideText.textContent = slides[current].getAttribute('data-text');
-  }
   
   function startSlideshow() {
     document.getElementById('startOverlay').style.display = 'none';
     music.play().catch(e => console.warn("Music autoplay blocked:", e));
 	
+	slides[current].classList.add('active');
 	slideText.textContent = slides[current].getAttribute('data-text');
 	
     interval = setInterval(showNextSlide, 6000);
-  }
+    }
+  
+    function showNextSlide() {
+    slides[current].classList.remove('active');
+    current++;
+	//current = (current + 1) % slides.length;
+	
+	if (current >= slides.length) {
+    clearInterval(interval); // Stop the slideshow
+	
+     // Show last slide again (make sure it's active)
+    current = slides.length - 1;
+    slides[current].classList.add('active');
+    slideText.textContent = slides[current].getAttribute('data-text');
+	
+	return;
+    }
+  
+    slides[current].classList.add('active');
+    slideText.textContent = slides[current].getAttribute('data-text');
+
+    // If this is the second-to-last slide, extend the interval just before the last one
+    if (current === slides.length - 1) {
+      clearInterval(interval); // Stop regular 6s interval
+      interval = setInterval(showNextSlide, 10000); // Last slide = 10s
+	  
+    // Start second music immediately
+    const music2 = document.getElementById('bgMusic2');
+    music2.play().catch(e => console.warn("Second music autoplay blocked:", e));
+    
+	setTimeout(() => {
+    let fadeOut = setInterval(() => {
+    if (music.volume > 0.05) {
+      music.volume -= 0.05;}
+	 else {
+      music.pause();
+      music.currentTime = 0;
+      music.volume = 1.0; // Reset volume if replayed
+      clearInterval(fadeOut);
+      }
+     }, 200); // volume decreases every 200ms
+    }, 5000); // Start fade after 5s
+	}
+}
 
 </script>
 
